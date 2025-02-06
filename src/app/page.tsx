@@ -1,15 +1,15 @@
-import Link from "next/link";
-import ProjectCards from "~/components/ProjectCard";
+import ProjectCards from "~/components/ProjectCards";
+import TopNav from "~/components/TopNav";
 
 export default function HomePage() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
       <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
         <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
-          Hi, I'm Lukas.<br></br> I call myself  <span className="text-[hsl(280,100%,70%)]">LR-Projects</span>
+          Hi, I'm Lukas.<br /> I call myself <span className="text-[hsl(280,100%,70%)]">LR-Projects</span>
         </h1>
         
-        <section className="w-full max-w-4xl">
+        <section className="w-full max-w-4xl" id="about-me">
           <h2 className="mb-6 text-3xl font-bold text-[hsl(280,100%,70%)]">About Me</h2>
           <p className="mb-8 text-lg leading-relaxed">
             I'm a passionate developer focused on creating elegant solutions to complex problems. 
@@ -17,12 +17,12 @@ export default function HomePage() {
           </p>
         </section>
 
-        <section className="w-full max-w-4xl">
+        <section className="w-full max-w-4xl" id="projects">
           <h2 className="mb-6 text-3xl font-bold text-[hsl(280,100%,70%)]">Projects</h2>
           <ProjectCards />
         </section>
 
-        <section className="w-full max-w-4xl">
+        <section className="w-full max-w-4xl" id="skills">
           <h2 className="mb-6 text-3xl font-bold text-[hsl(280,100%,70%)]">Skills</h2>
           <div className="flex flex-wrap gap-4">
             <span className="rounded-full bg-white/10 px-4 py-2">TypeScript</span>

@@ -27,6 +27,7 @@ export const projects = createTable(
     title: varchar("title", { length: 256 }).notNull(),
     description: varchar("description", { length: 1000 }).notNull(),
     image: varchar("image", { length: 512 }),
+    link: varchar("link", { length: 512 }),
     createdAt: timestamp("created_at", { withTimezone: true })
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
