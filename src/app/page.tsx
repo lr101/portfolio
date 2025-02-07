@@ -1,6 +1,5 @@
 import AboutSection from "~/components/AboutSection";
 import HeroSection from "~/components/HeroSection";
-import ProjectCards from "~/components/ProjectCards";
 import ProjectSection from "~/components/ProjectSection";
 import SkillSection from "~/components/SkillSection";
 import TopNav from "~/components/TopNav";

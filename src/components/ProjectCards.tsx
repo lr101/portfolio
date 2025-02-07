@@ -21,7 +21,6 @@ export default async function ProjectCards() {
               {project.image && (
                 <img
                   src={project.image}
-                  
                   alt={`${project.title} image`}
                   className="mb-4 rounded"
                 />
