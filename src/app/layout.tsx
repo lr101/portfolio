@@ -4,6 +4,7 @@ import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 import Footer from "~/components/Footer";
 import SideStripe from "~/components/SideStripe";
+import TopNav from "~/components/TopNav";
 
 export const metadata: Metadata = {
   title: "LR-Projects Portfolio",
@@ -17,6 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
       <body className="bg-gradient-to-b from-[#2e026d] to-[#221d38] text-white">
+        <TopNav />
         <SideStripe />
         {children}
         <Footer />

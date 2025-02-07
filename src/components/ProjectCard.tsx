@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { ProjectType } from "./ProjectSection";
+import { type ProjectType } from "./ProjectSection";
 import Image from "next/image";
 
 const ProjectCard = ({
@@ -19,7 +19,7 @@ const ProjectCard = ({
       className="relative flex flex-col w-full h-full"
     >
       <a
-        href={project.link || undefined}
+        href={project.link ?? undefined}
         className="relative flex flex-col rounded-2xl border border-white/20  p-6 shadow-lg transition-transform hover:scale-105"
       >
         {project.image && (

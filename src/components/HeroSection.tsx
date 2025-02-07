@@ -23,7 +23,7 @@ const HeroSection = () => {
     <section className="lg:py-16">
       <div className="grid grid-cols-1 sm:grid-cols-12">
         <div className="col-span-8 place-self-center text-center sm:text-left justify-self-start">
-            <h1 className='text-white mb-4 text-4xl sm:text-5xl lg:text-8xl font-extrabold'>Hi, I'm Lukas.</h1>
+            <h1 className='text-white mb-4 text-4xl sm:text-5xl lg:text-8xl font-extrabold'>Hi, I&apos;m Lukas.</h1>
             <div className='text-white mb-4 text-2xl sm:text-3xl lg:text-5xl font-extrabold'>
                 <h1>I call myself <span>
                     <TypeAnimation

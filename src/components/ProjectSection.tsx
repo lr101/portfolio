@@ -1,5 +1,4 @@
 import React from "react";
-import { getProjects } from "~/server/db/projects";
 import ProjectCard from "./ProjectCard";
 
 
@@ -78,7 +77,7 @@ const projectSection = () => {
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
 
-            {projectCardItems.map((project: any) => (
+            {projectCardItems.map((project: ProjectType) => (
               <ProjectCard project={project} key={project.id}/>
             ))}
           </div>

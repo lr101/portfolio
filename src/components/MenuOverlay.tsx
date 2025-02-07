@@ -1,6 +1,6 @@
 import React from "react";
 import NavLink from "./NavLink";
-import { NavLinkType } from "./TopNav";
+import { type NavLinkType } from "./TopNav";
 
 const MenuOverlay = ({ links }: {links: NavLinkType[]}) => {
   return (

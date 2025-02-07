@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 const socialLinks = [
   {
@@ -25,9 +26,11 @@ const SocialIcons = ({ className }:{className: string } ) => {
     >
       {socialLinks.map((icon, index) => (
         <a key={index} href={icon.href} target="_blank" rel="noopener noreferrer">
-          <img
+          <Image
             src={icon.src}
             alt={icon.alt}
+            width={6}
+            height={6}
             className="h-6 w-6 transition-transform hover:scale-110 fill"
           />
         </a>

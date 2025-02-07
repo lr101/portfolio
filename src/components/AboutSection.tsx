@@ -1,6 +1,6 @@
 import React from "react";
 
-import Timeline, { TimelineItem } from "./Timeline";
+import Timeline, { type TimelineItem } from "./Timeline";
 
 const timelineData: TimelineItem[] = [
     {

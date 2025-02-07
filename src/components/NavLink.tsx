@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { NavLinkType } from "./TopNav";
+import { type NavLinkType } from "./TopNav";
 
 const NavLink = ({ link }: { link: NavLinkType }) => {
   return (

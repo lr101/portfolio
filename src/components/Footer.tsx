@@ -3,7 +3,7 @@ import SocialIcons from "./SocialIcons";
 
 const Footer = () => {
   return (
-    <footer className="footer border z-10 border-t-[#33353F] border-l-transparent border-r-transparent text-white">
+    <footer className="footer border z-10 border-t-[#33353F] border-l-transparent border-r-transparent border-b-transparent text-white">
       <div className="flex container lg:py-4 flex-wrap items-center justify-between mx-auto px-12 py-2">
         <div className="flex flex-col place-items-start">
             <span>LR-Projects</span>
