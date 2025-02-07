@@ -1,13 +1,6 @@
 "use client";
 import React from "react";
-import dynamic from "next/dynamic";
-
-const AnimatedNumbers = dynamic(
-  () => {
-    return import("react-animated-numbers");
-  },
-  { ssr: false }
-);
+import AnimatedNumbers from "react-animated-numbers"
 
 const achievementsList = [
   {
@@ -37,9 +30,8 @@ const AchievementsSection = () => {
         {achievementsList.map((achievement, index) => {
           return (
             <div
-              key={index}
-              className="flex flex-col items-center justify-center mx-4 my-4 sm:my-0"
-            >
+              key={"achievement" + index}
+              className="flex flex-col items-center justify-center mx-4 my-4 sm:my-0">
               <h2 className="text-white text-4xl font-bold flex flex-row">
                 <AnimatedNumbers
                   includeComma

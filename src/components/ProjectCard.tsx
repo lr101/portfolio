@@ -2,14 +2,13 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { ProjectType } from "./ProjectCards";
+import { ProjectType } from "./ProjectSection";
+import Image from "next/image";
 
 const ProjectCard = ({
   project,
-  index,
 }: {
   project: ProjectType;
-  index: number;
 }) => {
   return (
     <motion.div
@@ -21,17 +20,24 @@ const ProjectCard = ({
     >
       <a
         href={project.link || undefined}
-        className="relative flex flex-col rounded-2xl border border-white/20 bg-gray-900 p-6 shadow-lg transition-transform hover:scale-105"
+        className="relative flex flex-col rounded-2xl border border-white/20  p-6 shadow-lg transition-transform hover:scale-105"
       >
         {project.image && (
-          <img
+          <Image
             src={project.image}
             alt={`${project.title} image`}
+            width={400}
+            height={400}
             className="mb-4 w-full rounded-lg object-cover"
           />
         )}
         <h3 className="mb-2 text-2xl font-bold text-white">{project.title}</h3>
-        <p className="text-gray-300">{project.description}</p>
+        {project.description.map((paragraph, index) => (
+            <p key={index} className="mt-1 text-gray-400">
+              {paragraph}
+            </p>
+          ))
+        }
       </a>
     </motion.div>
   );

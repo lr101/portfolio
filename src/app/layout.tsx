@@ -3,6 +3,7 @@ import "~/styles/globals.css";
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 import Footer from "~/components/Footer";
+import SideStripe from "~/components/SideStripe";
 
 export const metadata: Metadata = {
   title: "LR-Projects Portfolio",
@@ -15,10 +16,11 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
-      <body className="bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
+      <body className="bg-gradient-to-b from-[#2e026d] to-[#1f1647] text-white">
+        <SideStripe />
         {children}
+        <Footer />
       </body>
-      <Footer />
     </html>
   );
 }
