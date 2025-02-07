@@ -22,6 +22,7 @@ FROM --platform=linux/amd64 node:20-alpine AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+RUN mkdir /app/.next/standalone && mkdir /app/public && mkdir /app/.next/static
 
 # ENV NEXT_TELEMETRY_DISABLED 1
 
@@ -39,7 +40,7 @@ WORKDIR /app
 
 ENV NODE_ENV production
 
-# ENV NEXT_TELEMETRY_DISABLED 1
+ENV NEXT_TELEMETRY_DISABLED 1
 
 COPY --from=builder /app/next.config.js ./
 COPY --from=builder /app/public ./public
