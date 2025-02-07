@@ -1,28 +1,52 @@
-# Create T3 App
+# My Portfolio Website
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+Welcome to the repository for my personal portfolio website! This website showcases my skills, projects, and experience.
 
-## What's next? How do I make an app with this?
+## Table of Contents
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+*   [Overview](#overview)
+*   [Getting Started](#getting-started)
+*   [Deployment](#deployment)
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+## Overview
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+This portfolio website is designed to provide a comprehensive overview of my professional background and capabilities. It serves as a central hub for potential employers, collaborators, and anyone interested in learning more about me and my work. It is also my first time since forever to build my own website and using react/next.js. I must say ai makes the css part way easier...
 
-## Learn More
+## Getting Started
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+These instructions will guide you on how to get a copy of the project up and running on your local machine for development and testing purposes.
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+### Prerequisites
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+Before you begin, ensure you have the following installed:
 
-## How do I deploy this?
+*   [Node.js](https://nodejs.org/en/) (v16 or higher)
+*   [npm](https://www.npmjs.com/)
+*   [Git](https://git-scm.com/)
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+### Installation
+
+1.  Clone the repository:
+
+2.  Install dependencies:
+
+    ```bash
+    pnpm install
+    ```
+
+### Running the Website
+
+1.  Start the development server:
+
+    ```bash
+    pnpm dev
+    ```
+
+2.  Open your browser and navigate to `http://localhost:3000` (or the address provided by your development server).
+
+## Deployment
+
+This website is currently deployed on my own server and reachable under [lr-projects.de](https://lr-projects.de).
+
+Github Actions are used to build and publish a docker image to github packages. Copy the [docker-compose](./docker-compose.yml) file to your local machine and run `docker-compose up -d` to start the container.
+
