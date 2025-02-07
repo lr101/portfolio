@@ -31,7 +31,7 @@ const timelineData: TimelineItem[] = [
   ];
 
 const AboutSection = () => (
-    <section className="w-full max-w-4xl" id="about-me">
+    <section className="w-full max-w-5xl" id="about-me">
         <h2 className="mb-6 text-3xl font-bold text-[hsl(280,100%,70%)]">
             About Me
         </h2>

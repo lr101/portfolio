@@ -10,7 +10,11 @@ const sequence = [
     2000,
     "a Backend Developer.",
     2000,
-    "a Homelab-ber.",
+    "a Homelabber.",
+    2000,
+    "an Entusiast.",
+    2000,
+    "a Student.",
     2000,
 ];
 
