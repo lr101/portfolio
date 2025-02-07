@@ -2,7 +2,7 @@ import "~/styles/globals.css";
 
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
-import TopNav from "~/components/TopNav";
+import Footer from "~/components/Footer";
 
 export const metadata: Metadata = {
   title: "LR-Projects Portfolio",
@@ -17,7 +17,8 @@ export default function RootLayout({
     <html lang="en" className={`${GeistSans.variable}`}>
       <body className="bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
         {children}
-        </body>
+      </body>
+      <Footer />
     </html>
   );
 }
