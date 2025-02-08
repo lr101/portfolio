@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import NavLink from "./NavLink";
 import MenuOverlay from "./MenuOverlay";
+import Image from "next/image";
 
 export type NavLinkType = {
   title: string;
@@ -33,9 +34,16 @@ const Navbar = () => {
       <div className="flex container lg:py-4 flex-wrap items-center justify-between mx-auto px-12 py-2">
         <Link
           href={"/"}
-          className="text-2xl md:text-5xl text-white font-semibold"
+          className="flex items-center align-bottom"
         >
-          LR-Projects
+            <Image
+                src={"/icons/logo_lr_white.png"}
+                alt={"LR-Projects Logo" }
+                width={64}
+                height={64}
+                className="h-8 w-8 md:h-12 md:w-12 lg:h-16 lg:w-16" 
+                />
+            <span className="text-2xl md:text-5xl text-white font-semibold">Projects</span>
         </Link>
         <div className="mobile-menu block md:hidden">
           {!navbarOpen ? (
