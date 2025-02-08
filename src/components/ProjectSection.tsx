@@ -14,7 +14,7 @@ export interface ProjectType {
 const projectCardItems: ProjectType[] = [
   {
     id: 1,
-    link: "https://github.com/lr101/stick-it",
+    link: "https://stick-it-map.lr-projects.de/",
     image: "/images/project-stick-it.jpg",
     title: "Stick-It Map - a flutter app",
     description: 
