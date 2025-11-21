@@ -1,8 +1,0 @@
-
-services:
-  app:
-    image: ghcr.io/lr101/portfolio:latest
-    container_name: portfolio
-    working_dir: /app
-    ports:
-      - "3000:3000"
