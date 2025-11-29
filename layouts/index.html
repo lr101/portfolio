@@ -1,105 +1,309 @@
 {{ define "main" }}
 
 <style>
+  /* --- HERO SECTION STYLES --- */
   .custom-hero {
-      height: 80vh; /* Adjust height as needed */
+      height: 90vh; /* Increased slightly for impact */
       width: 100%;
-      background-size: cover;
-      background-position: center;
+      position: relative;
+      overflow: hidden;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
       color: white;
-      position: relative;
+      background-color: #0f111a; /* Fallback dark color */
   }
 
-  /* Dark overlay to make text readable */
-  .custom-hero::before {
-      content: "";
+  /* The Canvas for the Network Animation */
+  #network-canvas {
       position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.5);
-      pointer-events: none; /* allow clicks on links inside hero */
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      opacity: 0.6; /* Subtle effect */
+  }
+
+  /* Background Image (Optional: kept as a subtle underlay) */
+  .hero-bg-image {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-size: cover;
+      background-position: center;
+      z-index: 0;
+      opacity: 0.2; /* Very dim so the network nodes pop */
+      filter: blur(2px); /* Adds depth */
   }
 
   .hero-content {
       position: relative;
       z-index: 2;
+      padding: 0 20px;
+      max-width: 800px;
   }
 
+  /* --- TEXT ANIMATIONS --- */
   .hero-title {
-      font-size: 3.5rem; /* You might need to adjust this based on theme font sizes */
+      font-size: 3.5rem;
+      font-weight: 700;
       margin-bottom: 1rem;
-      color: #fff; 
+      color: #fff;
+      opacity: 0; /* Hidden initially */
+      animation: fadeInUp 0.8s ease-out forwards;
   }
 
   .hero-subtitle {
       font-size: 1.5rem;
       margin: 0.5rem 0 1rem 0;
-      color: #fff;
+      color: #e2e8f0;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease-out 0.3s forwards; /* 0.3s delay */
+  }
+  
+  .hero-subtitle-2 {
+      font-size: 1.25rem;
+      color: #94a3b8;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease-out 0.6s forwards; /* 0.6s delay */
   }
 
-  .social-links {
-      margin-top: 1rem;
-      display: flex;
-      justify-content: center;
-      gap: 10px;
+  /* Typewriter cursor effect */
+  .cursor {
+      display: inline-block;
+      width: 10px;
+      height: 3rem;
+      background-color: #fff;
+      margin-left: 5px;
+      animation: blink 1s infinite;
+      vertical-align: middle;
   }
 
-  .social-links a {
-      color: #fff;
-      border: 1px solid #fff;
-      padding: 10px 20px;
-      margin: 0 5px;
-      text-decoration: none;
-      border-radius: 4px;
-      transition: background 0.3s;
+  /* --- SCROLL REVEAL STYLES --- */
+  /* This class is added via JS to elements below the fold */
+  .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
   }
 
-  .social-links a:hover {
-      background: white;
-      color: black;
+  .reveal-on-scroll.is-visible {
+      opacity: 1;
+      transform: translateY(0);
   }
 
-  .custom-sections {
-      max-width: 800px;
-      margin: 4rem auto;
-      padding: 0 20px;
-      text-align: center;
-  }
-
+  /* --- STANDARD LAYOUT STYLES --- */
   .content-padding {
-    padding: 20px;
-    text-align: center;
+    padding: 40px 20px;
     margin: 0 auto;
+    max-width: 900px;
   }
+
+  .latest-posts-list {
+      margin-top: 1rem;
+      list-style: none;
+      padding: 0;
+  }
+  .latest-posts-list li {
+      margin-bottom: 0.5rem;
+      padding: 10px;
+      border-left: 2px solid #e5e7eb; /* Hextra grey */
+      transition: border-color 0.3s;
+  }
+  .latest-posts-list li:hover {
+      border-left-color: #007acc; /* Highlight color */
+  }
+
+  /* --- KEYFRAMES --- */
+  @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+  }
+
+  /* Responsiveness */
+  @media (max-width: 768px) {
+    .hero-title { font-size: 2.5rem; }
+    .hero-subtitle { font-size: 1.2rem; }
+    .cursor { height: 2rem; }
+  }
+  @media (min-width: 1400px) { .content-padding { max-width: 1100px; } }
 </style>
 
-<div class="custom-hero" style="background-image: url('{{ .Params.heroImage | relURL }}');">
+<div class="custom-hero">
+    <canvas id="network-canvas"></canvas>
+    
+    <div class="hero-bg-image" style="background-image: url('{{ .Params.heroImage | relURL }}');"></div>
+
     <div class="hero-content">
-        <h1 class="hero-title">{{ .Title }}</h1>
+        <h1 class="hero-title">
+            {{ .Title }}<span class="cursor"></span>
+        </h1>
         {{ with .Params.subtitle }}
         <h2 class="hero-subtitle">{{ . }}</h2>
         {{ end }}
         {{ with .Params.subtitle2 }}
-        <h2 class="hero-subtitle">{{ . }}</h2>
+        <p class="hero-subtitle-2">{{ . }}</p>
         {{ end }}
-        
     </div>
 </div>
 
-<div class="content content-padding">
+<div class="content content-padding" id="main-content">
     {{ .Content }}
-    <br>
-    {{ range ( where .Site.RegularPages "Type" "posts" | first 3 ) }}
-    <a href="{{ .Permalink }}">{{ .Title }} (posted on  {{ .Date.Format "02.01.2006" }})</a>
-    <br>
-    {{end}}
+    
+
+    <ul class="latest-posts-list">
+        {{ range ( where .Site.RegularPages "Type" "posts" | first 3 ) }}
+            <li><a href="{{ .Permalink }}"><b>{{ .Title }}</b></a> <br> <small style="color:#666">Posted on {{ .Date.Format "02.01.2006" }}</small></li>
+        {{ end }}
+    </ul>
 </div>
 
+<script>
+document.addEventListener("DOMContentLoaded", function() {
 
+    // 1. SCROLL REVEAL LOGIC
+    // Select main elements to animate: Headings, paragraphs, hr, blockquotes, and lists
+    const contentContainer = document.getElementById('main-content');
+    const elementsToAnimate = contentContainer.querySelectorAll('h2, h3, p, ul, ol, .hx-card, .cards, blockquote');
+    
+    const observerOptions = {
+        threshold: 0.1, // Trigger when 10% visible
+        rootMargin: "0px 0px -50px 0px" // Trigger slightly before bottom
+    };
 
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target); // Only animate once
+            }
+        });
+    }, observerOptions);
+
+    elementsToAnimate.forEach(el => {
+        el.classList.add('reveal-on-scroll');
+        observer.observe(el);
+    });
+
+    // 2. NETWORK BACKGROUND ANIMATION
+    const canvas = document.getElementById("network-canvas");
+    const ctx = canvas.getContext("2d");
+    let particlesArray;
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let mouse = { x: null, y: null, radius: (canvas.height/80) * (canvas.width/80) };
+
+    window.addEventListener('mousemove', function(event) {
+        mouse.x = event.x;
+        mouse.y = event.y;
+    });
+
+    // Create Particle
+    class Particle {
+        constructor(x, y, directionX, directionY, size, color) {
+            this.x = x;
+            this.y = y;
+            this.directionX = directionX;
+            this.directionY = directionY;
+            this.size = size;
+            this.color = color;
+        }
+        draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+            ctx.fillStyle = '#ffffff'; // Dot color
+            ctx.fill();
+        }
+        update() {
+            if (this.x > canvas.width || this.x < 0) { this.directionX = -this.directionX; }
+            if (this.y > canvas.height || this.y < 0) { this.directionY = -this.directionY; }
+
+            // Check collision with mouse
+            let dx = mouse.x - this.x;
+            let dy = mouse.y - this.y;
+            let distance = Math.sqrt(dx*dx + dy*dy);
+            if (distance < mouse.radius + this.size) {
+                if (mouse.x < this.x && this.x < canvas.width - 10) { this.x += 10; }
+                if (mouse.x > this.x && this.x > 10) { this.x -= 10; }
+                if (mouse.y < this.y && this.y < canvas.height - 10) { this.y += 10; }
+                if (mouse.y > this.y && this.y > 10) { this.y -= 10; }
+            }
+
+            this.x += this.directionX;
+            this.y += this.directionY;
+            this.draw();
+        }
+    }
+
+    function init() {
+        particlesArray = [];
+        // Number of particles based on screen size
+        let numberOfParticles = (canvas.height * canvas.width) / 9000; 
+        for (let i = 0; i < numberOfParticles; i++) {
+            let size = (Math.random() * 2) + 1; // Random size 1-3
+            let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
+            let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+            let directionX = (Math.random() * 2) - 1; // Speed
+            let directionY = (Math.random() * 2) - 1;
+            let color = '#ffffff';
+
+            particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
+        }
+    }
+
+    function animate() {
+        requestAnimationFrame(animate);
+        ctx.clearRect(0,0,innerWidth, innerHeight);
+
+        for (let i = 0; i < particlesArray.length; i++) {
+            particlesArray[i].update();
+        }
+        connect();
+    }
+
+    function connect() {
+        let opacityValue = 1;
+        for (let a = 0; a < particlesArray.length; a++) {
+            for (let b = a; b < particlesArray.length; b++) {
+                let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) + 
+                               ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+                if (distance < (canvas.width/7) * (canvas.height/7)) {
+                    opacityValue = 1 - (distance/20000);
+                    ctx.strokeStyle = 'rgba(255, 255, 255,' + opacityValue + ')'; // Line color
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                    ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                    ctx.stroke();
+                }
+            }
+        }
+    }
+
+    window.addEventListener('resize', function() {
+        canvas.width = innerWidth;
+        canvas.height = innerHeight;
+        mouse.radius = ((canvas.height/80) * (canvas.height/80));
+        init();
+    });
+
+    window.addEventListener('mouseout', function() {
+        mouse.x = undefined;
+        mouse.y = undefined;
+    });
+
+    init();
+    animate();
+});
+</script>
 
 {{ end }}
