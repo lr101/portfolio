@@ -1,5 +1,7 @@
 ---
 title: Portfolio Dev-Environment
+date: '2025-12-13T13:04:22+01:00'
+draft: false
 ---
 
 ## References
