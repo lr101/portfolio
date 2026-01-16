@@ -1,6 +1,6 @@
 ---
 date: '2026-01-14T18:30:22+01:00'
-draft: true
+draft: false
 title: About Me
 ---
 
@@ -18,3 +18,4 @@ I'm always open to discussing new projects, software architecture, or the latest
 * **LinkedIn:** [linkedin.com/in/lukas-reim](https://www.linkedin.com/in/lukas-reim)
 * **Play Store:** [My Apps](https://play.google.com/store/apps/dev?id=9104153533344895883)
 ---
+
